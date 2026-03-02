@@ -171,6 +171,10 @@ cloudBtn.onclick = () => {
         cloudPanel.style.display === "none" ? "block" : "none";
 };
 
+cloudPanel.onclick = (e) => {
+    e.stopPropagation();
+};
+
 onlineImages.forEach(url => {
     const thumb = document.createElement("img");
     thumb.src = url;
@@ -179,6 +183,10 @@ onlineImages.forEach(url => {
         cloudPanel.style.display = "none";
     };
     cloudThumbs.appendChild(thumb);
+});
+
+document.addEventListener("click", () => {
+    cloudPanel.style.display = "none";
 });
 
 /* -----------------------------------------
