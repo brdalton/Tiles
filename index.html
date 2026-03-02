@@ -165,15 +165,22 @@ const cloudBtn = document.getElementById("cloudBtn");
 const cloudPanel = document.getElementById("cloudPanel");
 const cloudThumbs = document.getElementById("cloudThumbs");
 
-cloudBtn.onclick = () => {
-	e.stopPropagation();
-    cloudPanel.style.display =
-        cloudPanel.style.display === "none" ? "block" : "none";
+cloudBtn.onclick = (e) => {
+    e.stopPropagation();
+    const isOpen = cloudPanel.style.display === "block";
+    cloudPanel.style.display = isOpen ? "none" : "block";
 };
 
 cloudPanel.onclick = (e) => {
     e.stopPropagation();
 };
+
+document.addEventListener("click", () => {
+	// If the click is on the cloud button, do nothing
+    if (e.target === cloudBtn) return;
+
+    cloudPanel.style.display = "none";
+});
 
 onlineImages.forEach(url => {
     const thumb = document.createElement("img");
@@ -183,10 +190,6 @@ onlineImages.forEach(url => {
         cloudPanel.style.display = "none";
     };
     cloudThumbs.appendChild(thumb);
-});
-
-document.addEventListener("click", () => {
-    cloudPanel.style.display = "none";
 });
 
 /* -----------------------------------------
